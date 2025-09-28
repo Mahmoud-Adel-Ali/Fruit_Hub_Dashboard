@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:fruit_hub_dashboard/core/utils/app_colors.dart';
+import 'package:fruit_hub_dashboard/core/utils/app_text_styles.dart';
+
+import '../../../../core/widgets/custom_button.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -6,6 +10,23 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          spacing: 32,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'FrutHub DashBoard',
+              style: AppTextStyles.bold19.copyWith(
+                color: AppColors.primaryColor,
+              ),
+            ),
+            CustomButton(text: 'Add Data', onPressed: () {}),
+          ],
+        ),
+      ),
+    );
   }
 }
