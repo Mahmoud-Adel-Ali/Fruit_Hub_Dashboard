@@ -3,6 +3,7 @@ import 'package:fruit_hub_dashboard/core/utils/app_colors.dart';
 import 'package:fruit_hub_dashboard/core/utils/app_text_styles.dart';
 
 import '../../../../core/widgets/custom_button.dart';
+import '../../../add_product/presentation/views/add_product_view.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({super.key});
@@ -23,7 +24,12 @@ class DashboardView extends StatelessWidget {
                 color: AppColors.primaryColor,
               ),
             ),
-            CustomButton(text: 'Add Data', onPressed: () {}),
+            CustomButton(
+              text: 'Add Data',
+              onPressed: () {
+                Navigator.of(context).pushNamed(AddProductView.routeName);
+              },
+            ),
           ],
         ),
       ),
