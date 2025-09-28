@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:fruit_hub_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
 
+import 'core/helper_function/on_generate_routes.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -15,7 +17,10 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      home: Scaffold(body: Center(child: Text('Hello World!'))),
+      title: 'Fruit Hub Dashboard',
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: onGenerateRoutes,
+      initialRoute: DashboardView.routeName,
     );
   }
 }
