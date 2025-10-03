@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/custom_text_form_field.dart';
+import 'pick_image_field.dart';
 
 class AddProductViewBody extends StatefulWidget {
   const AddProductViewBody({super.key});
@@ -25,6 +26,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              PickImageField(),
               CustomTextFormField(
                 hintText: 'name',
                 keyboardType: TextInputType.text,
