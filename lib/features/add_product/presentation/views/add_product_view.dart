@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/utils/app_colors.dart';
 import 'widgets/add_product_view_body.dart';
 
 class AddProductView extends StatelessWidget {
@@ -8,7 +9,13 @@ class AddProductView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Add Product'), centerTitle: true),
+      backgroundColor: AppColors.white,
+      appBar: AppBar(
+        title: Text('Add Product'),
+        centerTitle: true,
+        backgroundColor: AppColors.white,
+        flexibleSpace: Container(color: AppColors.white),
+      ),
       body: AddProductViewBody(),
     );
   }

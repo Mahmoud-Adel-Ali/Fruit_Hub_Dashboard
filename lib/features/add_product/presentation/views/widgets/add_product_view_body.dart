@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../../core/widgets/custom_text_form_field.dart';
+import 'labeled_checkbox.dart';
 import 'pick_image_field.dart';
 
 class AddProductViewBody extends StatefulWidget {
@@ -26,7 +27,6 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              PickImageField(onFileChanged: (file) {}),
               CustomTextFormField(
                 hintText: 'name',
                 keyboardType: TextInputType.text,
@@ -44,6 +44,18 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                 keyboardType: TextInputType.text,
                 maxLines: 5,
               ),
+              Row(
+                children: [
+                  Expanded(
+                    child: LabeledCheckbox(
+                      label: 'Is Featured Item ?',
+                      value: false,
+                      onChanged: (v) {},
+                    ),
+                  ),
+                ],
+              ),
+              PickImageField(onFileChanged: (file) {}),
             ],
           ),
         ),
