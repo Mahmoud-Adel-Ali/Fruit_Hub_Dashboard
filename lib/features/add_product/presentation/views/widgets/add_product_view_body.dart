@@ -26,7 +26,7 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
             spacing: 16,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              PickImageField(),
+              PickImageField(onFileChanged: (file) {}),
               CustomTextFormField(
                 hintText: 'name',
                 keyboardType: TextInputType.text,
