@@ -1,5 +1,10 @@
-import 'package:flutter/material.dart';
+import 'dart:io';
 
+import 'package:flutter/material.dart';
+import 'package:fruit_hub_dashboard/core/widgets/custom_button.dart';
+
+import '../../../../../core/helper_function/simple_validaton.dart';
+import '../../../../../core/helper_function/snack_bar.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import 'labeled_checkbox.dart';
 import 'pick_image_field.dart';
@@ -14,7 +19,13 @@ class AddProductViewBody extends StatefulWidget {
 class _AddProductViewBodyState extends State<AddProductViewBody> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
-
+  // controllers
+  var name = TextEditingController();
+  var price = TextEditingController();
+  var code = TextEditingController();
+  var description = TextEditingController();
+  bool isFeatured = false;
+  File? image;
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -30,19 +41,27 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               CustomTextFormField(
                 hintText: 'name',
                 keyboardType: TextInputType.text,
+                controller: name,
+                validator: simpleValidator,
               ),
               CustomTextFormField(
                 hintText: 'price',
                 keyboardType: TextInputType.number,
+                controller: price,
+                validator: simpleValidator,
               ),
               CustomTextFormField(
                 hintText: 'code',
                 keyboardType: TextInputType.number,
+                controller: code,
+                validator: simpleValidator,
               ),
               CustomTextFormField(
                 hintText: 'description',
                 keyboardType: TextInputType.text,
                 maxLines: 5,
+                controller: description,
+                validator: simpleValidator,
               ),
               Row(
                 children: [
@@ -50,12 +69,35 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                     child: LabeledCheckbox(
                       label: 'Is Featured Item ?',
                       value: false,
-                      onChanged: (v) {},
+                      onChanged: (val) {
+                        isFeatured = val;
+                        setState(() {});
+                      },
                     ),
                   ),
                 ],
               ),
-              PickImageField(onFileChanged: (file) {}),
+              PickImageField(
+                onFileChanged: (file) {
+                  image = file;
+                  setState(() {});
+                },
+              ),
+              SizedBox(height: 32),
+              CustomButton(
+                text: 'Add Product',
+                onPressed: () {
+                  if (formKey.currentState!.validate() && image != null) {
+                    formKey.currentState!.save();
+                  } else if (image == null) {
+                    showErrorSnackBar(context, msg: 'Please select an image');
+                  } else {
+                    autovalidateMode = AutovalidateMode.always;
+                    setState(() {});
+                  }
+                },
+              ),
+              SizedBox(height: 32),
             ],
           ),
         ),
