@@ -9,6 +9,7 @@ environment:
 dependencies:
   dartz: ^0.10.1
   firebase_core: ^4.1.1
+  firebase_storage: ^13.0.3
   flutter:
     sdk: flutter
   image_picker: ^1.2.0
