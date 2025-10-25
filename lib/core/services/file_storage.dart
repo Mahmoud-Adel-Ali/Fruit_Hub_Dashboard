@@ -5,7 +5,7 @@ import 'package:path/path.dart' as b;
 
 import 'storage_service.dart';
 
-class FireStorage implements StorageService {
+class FileStorage implements StorageService {
   final storageReference = FirebaseStorage.instance.ref();
 
   @override
