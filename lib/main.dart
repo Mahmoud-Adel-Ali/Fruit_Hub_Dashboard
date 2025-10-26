@@ -1,8 +1,10 @@
+import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:fruit_hub_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
 
 import 'core/helper_function/on_generate_routes.dart';
+import 'core/services/custom_bloc_observer.dart';
 import 'core/services/service_locator.dart';
 import 'firebase_options.dart';
 
@@ -11,6 +13,7 @@ Future<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   setupServicesLocator();
 
+  Bloc.observer = CustomBlocObserver();
   runApp(const MainApp());
 }
 
