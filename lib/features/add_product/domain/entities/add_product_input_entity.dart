@@ -9,6 +9,12 @@ class AddProductInputEntity {
   final File image;
   final bool isFeatured;
   final String? imgUrl;
+  final int expirationMonths;
+  final bool isOrganic;
+  final int numOfCalories;
+  final int unitAmount;
+  final num avarageRating;
+  final int ratingCount;
 
   const AddProductInputEntity({
     required this.name,
@@ -18,6 +24,12 @@ class AddProductInputEntity {
     required this.image,
     required this.isFeatured,
     this.imgUrl,
+    required this.expirationMonths,
+    required this.isOrganic,
+    required this.numOfCalories,
+    required this.unitAmount,
+    this.avarageRating = 0,
+    this.ratingCount = 0,
   });
 
   AddProductInputEntity copyWith({
@@ -28,6 +40,12 @@ class AddProductInputEntity {
     File? image,
     bool? isFeatured,
     String? imgUrl,
+    int? expirationMonths,
+    bool? isOrganic,
+    int? numOfCalories,
+    int? unitAmount,
+    num? avarageRating,
+    int? ratingCount,
   }) {
     return AddProductInputEntity(
       name: name ?? this.name,
@@ -37,6 +55,12 @@ class AddProductInputEntity {
       image: image ?? this.image,
       isFeatured: isFeatured ?? this.isFeatured,
       imgUrl: imgUrl ?? this.imgUrl,
+      expirationMonths: expirationMonths ?? this.expirationMonths,
+      isOrganic: isOrganic ?? this.isOrganic,
+      numOfCalories: numOfCalories ?? this.numOfCalories,
+      unitAmount: unitAmount ?? this.unitAmount,
+      avarageRating: avarageRating ?? this.avarageRating,
+      ratingCount: ratingCount ?? this.ratingCount,
     );
   }
 }

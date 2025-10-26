@@ -11,6 +11,12 @@ class AddProductInputModel {
   final File image;
   final bool isFeatured;
   final String? imgUrl;
+  final int expirationMonths;
+  final bool isOrganic;
+  final int numOfCalories;
+  final int unitAmount;
+  final num avarageRating;
+  final int ratingCount;
 
   const AddProductInputModel({
     required this.name,
@@ -20,6 +26,12 @@ class AddProductInputModel {
     required this.image,
     required this.isFeatured,
     this.imgUrl,
+    required this.expirationMonths,
+    required this.isOrganic,
+    required this.numOfCalories,
+    required this.unitAmount,
+    this.avarageRating = 0,
+    this.ratingCount = 0,
   });
 
   AddProductInputModel copyWith({
@@ -30,6 +42,12 @@ class AddProductInputModel {
     File? image,
     bool? isFeatured,
     String? imgUrl,
+    int? expirationMonths,
+    bool? isOrganic,
+    int? numOfCalories,
+    int? unitAmount,
+    num? avarageRating,
+    int? ratingCount,
   }) {
     return AddProductInputModel(
       name: name ?? this.name,
@@ -39,6 +57,12 @@ class AddProductInputModel {
       image: image ?? this.image,
       isFeatured: isFeatured ?? this.isFeatured,
       imgUrl: imgUrl ?? this.imgUrl,
+      expirationMonths: expirationMonths ?? this.expirationMonths,
+      isOrganic: isOrganic ?? this.isOrganic,
+      numOfCalories: numOfCalories ?? this.numOfCalories,
+      unitAmount: unitAmount ?? this.unitAmount,
+      avarageRating: avarageRating ?? this.avarageRating,
+      ratingCount: ratingCount ?? this.ratingCount,
     );
   }
 
@@ -50,6 +74,12 @@ class AddProductInputModel {
       'description': description,
       'isFeatured': isFeatured,
       'imgUrl': imgUrl,
+      'expirationMonths': expirationMonths,
+      'isOrganic': isOrganic,
+      'numOfCalories': numOfCalories,
+      'unitAmount': unitAmount,
+      'avarageRating': avarageRating,
+      'ratingCount': ratingCount,
     };
   }
 
@@ -63,6 +93,12 @@ class AddProductInputModel {
       image: entity.image,
       isFeatured: entity.isFeatured,
       imgUrl: entity.imgUrl,
+      expirationMonths: entity.expirationMonths,
+      isOrganic: entity.isOrganic,
+      numOfCalories: entity.numOfCalories,
+      unitAmount: entity.unitAmount,
+      avarageRating: entity.avarageRating,
+      ratingCount: entity.ratingCount,
     );
   }
 }
