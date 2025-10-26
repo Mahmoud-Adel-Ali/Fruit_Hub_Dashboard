@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub_dashboard/core/widgets/custom_button.dart';
 
 import '../../../../../core/helper_function/simple_validaton.dart';
 import '../../../../../core/helper_function/snack_bar.dart';
 import '../../../../../core/widgets/custom_text_form_field.dart';
 import '../../../domain/entities/add_product_input_entity.dart';
+import '../../manager/cubits/add_product_cubit.dart';
 import 'labeled_checkbox.dart';
 import 'pick_image_field.dart';
 
@@ -97,6 +99,10 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                       description: description.text,
                       isFeatured: isFeatured,
                       image: image!,
+                    );
+
+                    context.read<AddProductCubit>().addProduct(
+                      addProductInputEntity: item,
                     );
                   } else if (image == null) {
                     showErrorSnackBar(context, msg: 'Please select an image');
