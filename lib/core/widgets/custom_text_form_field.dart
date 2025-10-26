@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import '../utils/app_colors.dart';
 import '../utils/app_text_styles.dart';
@@ -15,6 +16,7 @@ class CustomTextFormField extends StatelessWidget {
     this.controller,
     this.keyboardType,
     this.maxLines = 1,
+    this.inputFormatters,
   });
   final TextEditingController? controller;
   final String hintText;
@@ -24,12 +26,14 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? prefixIcon;
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
+  final List<TextInputFormatter>? inputFormatters;
   final int maxLines;
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       maxLines: maxLines,
       keyboardType: keyboardType,
+      inputFormatters: inputFormatters,
       controller: controller,
       obscureText: obscureText ?? false, // show_Text or no
       validator: validator,

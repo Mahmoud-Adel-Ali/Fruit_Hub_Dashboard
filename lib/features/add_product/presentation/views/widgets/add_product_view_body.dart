@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fruit_hub_dashboard/core/widgets/custom_button.dart';
 
@@ -27,7 +28,10 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
   var price = TextEditingController();
   var code = TextEditingController();
   var description = TextEditingController();
-  bool isFeatured = false;
+  var expirationMonths = TextEditingController();
+  var numOfCalories = TextEditingController();
+  var unitAmount = TextEditingController();
+  bool isFeatured = false, isOrganic = false;
   File? image;
   @override
   Widget build(BuildContext context) {
@@ -50,12 +54,14 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               CustomTextFormField(
                 hintText: 'price',
                 keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 controller: price,
                 validator: simpleValidator,
               ),
               CustomTextFormField(
                 hintText: 'code',
                 keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 controller: code,
                 validator: simpleValidator,
               ),
@@ -66,6 +72,27 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                 controller: description,
                 validator: simpleValidator,
               ),
+              CustomTextFormField(
+                hintText: 'expiration months',
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                controller: expirationMonths,
+                validator: simpleValidator,
+              ),
+              CustomTextFormField(
+                hintText: 'num of calories',
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                controller: numOfCalories,
+                validator: simpleValidator,
+              ),
+              CustomTextFormField(
+                hintText: 'unit amount',
+                keyboardType: TextInputType.number,
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                controller: unitAmount,
+                validator: simpleValidator,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -74,6 +101,20 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                       value: false,
                       onChanged: (val) {
                         isFeatured = val;
+                        setState(() {});
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: LabeledCheckbox(
+                      label: 'Is Product Organic ?',
+                      value: false,
+                      onChanged: (val) {
+                        isOrganic = val;
                         setState(() {});
                       },
                     ),
@@ -99,6 +140,10 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                       description: description.text,
                       isFeatured: isFeatured,
                       image: image!,
+                      expirationMonths: int.parse(expirationMonths.text),
+                      isOrganic: isOrganic,
+                      numOfCalories: int.parse(numOfCalories.text),
+                      unitAmount: int.parse(unitAmount.text),
                     );
 
                     context.read<AddProductCubit>().addProduct(
