@@ -6,6 +6,7 @@ import '../../../../core/repos/images_repo/images_repo.dart';
 import '../../../../core/repos/products_repo/product_repo.dart';
 import '../../../../core/services/service_locator.dart';
 import '../../../../core/utils/app_colors.dart';
+import '../../../../core/widgets/custom_progress_hub.dart';
 import 'widgets/add_product_view_body.dart';
 
 class AddProductView extends StatelessWidget {
@@ -50,7 +51,10 @@ class AddProductCubitBlocConsumer extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        return AddProductViewBody();
+        return CustomProgressHub(
+          isLoading: state is AddProductLoading,
+          child: AddProductViewBody(),
+        );
       },
     );
   }
