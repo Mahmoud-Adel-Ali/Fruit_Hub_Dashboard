@@ -4,7 +4,7 @@ import '../../../features/add_product/domain/entities/add_product_input_entity.d
 import '../../errors/failures.dart';
 
 abstract class ProductRepo {
-  Future<Either<Failure, String>> addProduct({
+  Future<Either<Failure, void>> addProduct({
     required AddProductInputEntity addProductInputEntity,
   });
 }
