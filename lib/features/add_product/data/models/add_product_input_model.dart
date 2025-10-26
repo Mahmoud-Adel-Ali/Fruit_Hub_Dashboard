@@ -48,22 +48,9 @@ class AddProductInputModel {
       'price': price,
       'code': code,
       'description': description,
-      'image': image.path,
       'isFeatured': isFeatured,
       'imgUrl': imgUrl,
     };
-  }
-
-  factory AddProductInputModel.fromJson(Map<String, dynamic> json) {
-    return AddProductInputModel(
-      name: json['name'] as String,
-      price: json['price'] as num,
-      code: json['code'] as String,
-      description: json['description'] as String,
-      image: File(json['image'] as String),
-      isFeatured: json['isFeatured'] as bool,
-      imgUrl: json['imgUrl'] != null ? json['imgUrl'] as String : null,
-    );
   }
 
   // form AddProductInputEntity to AddProductInputModel
