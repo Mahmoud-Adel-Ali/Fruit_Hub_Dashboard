@@ -1,7 +1,7 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io' show File;
+import 'dart:io';
 
 import '../../domain/entities/add_product_input_entity.dart';
+import 'review_model.dart';
 
 class AddProductInputModel {
   final String name;
@@ -17,6 +17,7 @@ class AddProductInputModel {
   final int unitAmount;
   final num avarageRating;
   final int ratingCount;
+  final List<ReviewModel> reviews;
 
   const AddProductInputModel({
     required this.name,
@@ -32,6 +33,7 @@ class AddProductInputModel {
     required this.unitAmount,
     this.avarageRating = 0,
     this.ratingCount = 0,
+    this.reviews = const [],
   });
 
   AddProductInputModel copyWith({
@@ -48,6 +50,7 @@ class AddProductInputModel {
     int? unitAmount,
     num? avarageRating,
     int? ratingCount,
+    List<ReviewModel>? reviews,
   }) {
     return AddProductInputModel(
       name: name ?? this.name,
@@ -63,6 +66,7 @@ class AddProductInputModel {
       unitAmount: unitAmount ?? this.unitAmount,
       avarageRating: avarageRating ?? this.avarageRating,
       ratingCount: ratingCount ?? this.ratingCount,
+      reviews: reviews ?? this.reviews,
     );
   }
 
@@ -80,6 +84,7 @@ class AddProductInputModel {
       'unitAmount': unitAmount,
       'avarageRating': avarageRating,
       'ratingCount': ratingCount,
+      'reviews': reviews.map((item) => item.toJson()).toList(),
     };
   }
 
@@ -99,6 +104,7 @@ class AddProductInputModel {
       unitAmount: entity.unitAmount,
       avarageRating: entity.avarageRating,
       ratingCount: entity.ratingCount,
+      reviews: entity.reviews.map((x) => ReviewModel.fromEntity(x)).toList(),
     );
   }
 }

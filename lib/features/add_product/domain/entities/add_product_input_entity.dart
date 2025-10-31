@@ -1,6 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:io' show File;
 
+import 'review_entity.dart';
+
+
 class AddProductInputEntity {
   final String name;
   final num price;
@@ -15,6 +18,7 @@ class AddProductInputEntity {
   final int unitAmount;
   final num avarageRating;
   final int ratingCount;
+  final List<ReviewEntity> reviews;
 
   const AddProductInputEntity({
     required this.name,
@@ -30,6 +34,7 @@ class AddProductInputEntity {
     required this.unitAmount,
     this.avarageRating = 0,
     this.ratingCount = 0,
+    this.reviews = const [],
   });
 
   AddProductInputEntity copyWith({
@@ -46,6 +51,7 @@ class AddProductInputEntity {
     int? unitAmount,
     num? avarageRating,
     int? ratingCount,
+    List<ReviewEntity>? reviews,
   }) {
     return AddProductInputEntity(
       name: name ?? this.name,
@@ -61,6 +67,7 @@ class AddProductInputEntity {
       unitAmount: unitAmount ?? this.unitAmount,
       avarageRating: avarageRating ?? this.avarageRating,
       ratingCount: ratingCount ?? this.ratingCount,
+      reviews: reviews ?? this.reviews,
     );
   }
 }
