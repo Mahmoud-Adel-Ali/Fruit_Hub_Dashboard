@@ -5,14 +5,16 @@ import '../repos/images_repo/images_repo_impl.dart';
 import '../repos/products_repo/product_repo.dart';
 import '../repos/products_repo/product_repo_impl.dart';
 import 'database_service.dart';
-import 'fire_storage.dart';
 import 'firestore_service.dart';
 import 'storage_service.dart';
+import 'supabase_storage_service.dart';
 
 final getit = GetIt.instance;
 
 void setupServicesLocator() {
-  getit.registerSingleton<StorageService>(FireStorage());
+  // getit.registerSingleton<StorageService>(FireStorage());
+  getit.registerSingleton<StorageService>(SupabaseStorageService());
+  
   getit.registerSingleton<ImagesRepo>(
     ImagesRepoImpl(storageService: getit.get<StorageService>()),
   );
