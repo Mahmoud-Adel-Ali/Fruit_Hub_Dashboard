@@ -1,15 +1,24 @@
 import 'package:bloc/bloc.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:fruit_hub_dashboard/features/dashboard/presentation/views/dashboard_view.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'core/helper_function/on_generate_routes.dart';
 import 'core/services/custom_bloc_observer.dart';
 import 'core/services/service_locator.dart';
+import 'core/utils/app_keys.dart';
+import 'features/dashboard/presentation/views/dashboard_view.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  //* Supabase initialization
+  await Supabase.initialize(
+    url: AppKeys.supabaseUrl,
+    anonKey: AppKeys.supabaseAnonKey,
+  );
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   setupServicesLocator();
 
