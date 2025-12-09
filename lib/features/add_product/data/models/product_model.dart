@@ -1,10 +1,9 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:io' show File;
+import 'dart:io';
 
-import 'review_entity.dart';
+import '../../domain/entities/product_entity.dart';
+import 'review_model.dart';
 
-
-class AddProductInputEntity {
+class ProductModel {
   final String name;
   final num price;
   final String code;
@@ -18,9 +17,9 @@ class AddProductInputEntity {
   final int unitAmount;
   final num avarageRating;
   final int ratingCount;
-  final List<ReviewEntity> reviews;
+  final List<ReviewModel> reviews;
 
-  const AddProductInputEntity({
+  const ProductModel({
     required this.name,
     required this.price,
     required this.code,
@@ -37,7 +36,7 @@ class AddProductInputEntity {
     this.reviews = const [],
   });
 
-  AddProductInputEntity copyWith({
+  ProductModel copyWith({
     String? name,
     num? price,
     String? code,
@@ -51,9 +50,9 @@ class AddProductInputEntity {
     int? unitAmount,
     num? avarageRating,
     int? ratingCount,
-    List<ReviewEntity>? reviews,
+    List<ReviewModel>? reviews,
   }) {
-    return AddProductInputEntity(
+    return ProductModel(
       name: name ?? this.name,
       price: price ?? this.price,
       code: code ?? this.code,
@@ -68,6 +67,44 @@ class AddProductInputEntity {
       avarageRating: avarageRating ?? this.avarageRating,
       ratingCount: ratingCount ?? this.ratingCount,
       reviews: reviews ?? this.reviews,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      'name': name,
+      'price': price,
+      'code': code,
+      'description': description,
+      'isFeatured': isFeatured,
+      'imgUrl': imgUrl,
+      'expirationMonths': expirationMonths,
+      'isOrganic': isOrganic,
+      'numOfCalories': numOfCalories,
+      'unitAmount': unitAmount,
+      'avarageRating': avarageRating,
+      'ratingCount': ratingCount,
+      'reviews': reviews.map((item) => item.toJson()).toList(),
+    };
+  }
+
+  // form AddProductInputEntity to AddProductInputModel
+  factory ProductModel.fromEntity(ProductEntity entity) {
+    return ProductModel(
+      name: entity.name,
+      price: entity.price,
+      code: entity.code,
+      description: entity.description,
+      image: entity.image,
+      isFeatured: entity.isFeatured,
+      imgUrl: entity.imgUrl,
+      expirationMonths: entity.expirationMonths,
+      isOrganic: entity.isOrganic,
+      numOfCalories: entity.numOfCalories,
+      unitAmount: entity.unitAmount,
+      avarageRating: entity.avarageRating,
+      ratingCount: entity.ratingCount,
+      reviews: entity.reviews.map((x) => ReviewModel.fromEntity(x)).toList(),
     );
   }
 }

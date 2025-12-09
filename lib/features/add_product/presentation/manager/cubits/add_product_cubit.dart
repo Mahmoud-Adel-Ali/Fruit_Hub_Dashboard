@@ -2,7 +2,7 @@ import 'package:bloc/bloc.dart';
 
 import '../../../../../core/repos/images_repo/images_repo.dart';
 import '../../../../../core/repos/products_repo/product_repo.dart';
-import '../../../domain/entities/add_product_input_entity.dart';
+import '../../../domain/entities/product_entity.dart';
 
 part 'add_product_state.dart';
 
@@ -14,7 +14,7 @@ class AddProductCubit extends Cubit<AddProductState> {
   final ProductRepo productRepo;
 
   Future<void> addProduct({
-    required AddProductInputEntity addProductInputEntity,
+    required ProductEntity addProductInputEntity,
   }) async {
     emit(AddProductLoading());
     final uploadImageResult = await imagesRepo.uploadImage(

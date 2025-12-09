@@ -40,7 +40,6 @@ class SupabaseStorageService implements StorageService {
     final result = await client.storage
         .from(AppKeys.fruitsImagesBucketName) // your storage bucket
         .upload('$path/$fileName', file);
-    // TODo : search about this , how to get file download url
     var publicUrl = client.storage
         .from(AppKeys.fruitsImagesBucketName)
         .getPublicUrl('$path/$fileName');
