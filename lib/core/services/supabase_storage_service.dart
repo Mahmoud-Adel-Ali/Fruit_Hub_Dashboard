@@ -22,7 +22,10 @@ class SupabaseStorageService implements StorageService {
     List<Bucket> buckets = await client.storage.listBuckets();
     bool exists = buckets.any((element) => element.name == bucketName);
     if (!exists) {
-      await client.storage.createBucket(bucketName);
+      await client.storage.createBucket(
+        bucketName,
+        BucketOptions(public: true),
+      );
     }
   }
 
@@ -33,11 +36,15 @@ class SupabaseStorageService implements StorageService {
     final fileName = my_path.basename(file.path);
     // final fileExtension = my_path.extension(file.path);
 
+    // ignore: unused_local_variable
     final result = await client.storage
         .from(AppKeys.fruitsImagesBucketName) // your storage bucket
         .upload('$path/$fileName', file);
-
-    log("File uploaded successfully: $result");
-    return result;
+    // TODo : search about this , how to get file download url
+    var publicUrl = client.storage
+        .from(AppKeys.fruitsImagesBucketName)
+        .getPublicUrl('$path/$fileName');
+    log("File uploaded successfully: $publicUrl");
+    return publicUrl;
   }
 }
