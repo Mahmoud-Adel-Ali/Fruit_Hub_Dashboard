@@ -6,6 +6,7 @@ import 'core/helper_function/on_generate_routes.dart';
 import 'core/services/custom_bloc_observer.dart';
 import 'core/services/service_locator.dart';
 import 'core/services/supabase_storage_service.dart';
+import 'core/utils/app_keys.dart';
 import 'features/dashboard/presentation/views/dashboard_view.dart';
 import 'firebase_options.dart';
 
@@ -14,6 +15,7 @@ Future<void> main() async {
 
   //* Supabase initialization
   await SupabaseStorageService.initialize();
+  await SupabaseStorageService.createBucket(AppKeys.fruitsImagesBucketName);
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   setupServicesLocator();

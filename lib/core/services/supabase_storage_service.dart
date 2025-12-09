@@ -1,5 +1,6 @@
 import 'dart:developer';
 import 'dart:io';
+
 import 'package:path/path.dart' as my_path;
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -16,19 +17,21 @@ class SupabaseStorageService implements StorageService {
     );
   }
 
+  static Future<void> createBucket(String bucketName) async {
+    final client = _supabase.client;
+    await client.storage.createBucket(bucketName);
+  }
+
   @override
-  Future<String> uploadFile({
-    required File file,
-    required String path,
-  }) async {
+  Future<String> uploadFile({required File file, required String path}) async {
     final client = _supabase.client;
 
     final fileName = my_path.basename(file.path);
-    final fileExtension = my_path.extension(file.path);
-    
+    // final fileExtension = my_path.extension(file.path);
+
     final result = await client.storage
-        .from('fruits_images') // your storage bucket
-        .upload('$path/$fileName.$fileExtension', file);
+        .from(AppKeys.fruitsImagesBucketName) // your storage bucket
+        .upload('$path/$fileName', file);
 
     log("File uploaded successfully: $result");
     return result;
