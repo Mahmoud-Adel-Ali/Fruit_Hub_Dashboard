@@ -19,7 +19,11 @@ class SupabaseStorageService implements StorageService {
 
   static Future<void> createBucket(String bucketName) async {
     final client = _supabase.client;
-    await client.storage.createBucket(bucketName);
+    List<Bucket> buckets = await client.storage.listBuckets();
+    bool exists = buckets.any((element) => element.name == bucketName);
+    if (!exists) {
+      await client.storage.createBucket(bucketName);
+    }
   }
 
   @override
