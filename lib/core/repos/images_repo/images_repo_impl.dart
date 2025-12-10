@@ -26,4 +26,19 @@ class ImagesRepoImpl implements ImagesRepo {
       return Left(ServerFailure("Failed to upload image."));
     }
   }
+
+  @override
+  Future<Either<Failure, String>> deleteImage({
+    required String filePath,
+  }) async {
+    try {
+      final result = await storageService.deleteFile(filePath: filePath);
+      return result
+          ? Right('Image removed successfully.')
+          : Left(ServerFailure("Failed te remove file"));
+    } catch (e) {
+      log("Failed to upload image: $e");
+      return Left(ServerFailure("Failed to delete image."));
+    }
+  }
 }

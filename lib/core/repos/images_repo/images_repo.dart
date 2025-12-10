@@ -6,4 +6,5 @@ import '../../errors/failures.dart';
 
 abstract class ImagesRepo {
   Future<Either<Failure, String>> uploadImage({required File image});
+  Future<Either<Failure, String>> deleteImage({required String filePath});
 }
