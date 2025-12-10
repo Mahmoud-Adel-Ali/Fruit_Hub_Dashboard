@@ -17,6 +17,7 @@ class ProductModel {
   final int unitAmount;
   final num avarageRating;
   final int ratingCount;
+  final int sellingCount;
   final List<ReviewModel> reviews;
 
   const ProductModel({
@@ -33,6 +34,7 @@ class ProductModel {
     required this.unitAmount,
     this.avarageRating = 0,
     this.ratingCount = 0,
+    this.sellingCount = 0,
     this.reviews = const [],
   });
 
@@ -50,6 +52,7 @@ class ProductModel {
     int? unitAmount,
     num? avarageRating,
     int? ratingCount,
+    int? sellingCount,
     List<ReviewModel>? reviews,
   }) {
     return ProductModel(
@@ -66,6 +69,7 @@ class ProductModel {
       unitAmount: unitAmount ?? this.unitAmount,
       avarageRating: avarageRating ?? this.avarageRating,
       ratingCount: ratingCount ?? this.ratingCount,
+      sellingCount: sellingCount ?? this.sellingCount,
       reviews: reviews ?? this.reviews,
     );
   }
@@ -84,6 +88,7 @@ class ProductModel {
       'unitAmount': unitAmount,
       'avarageRating': avarageRating,
       'ratingCount': ratingCount,
+      'sellingCount': sellingCount,
       'reviews': reviews.map((item) => item.toJson()).toList(),
     };
   }
