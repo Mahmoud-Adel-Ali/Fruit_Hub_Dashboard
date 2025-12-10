@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
@@ -17,5 +18,18 @@ class FireStorage implements StorageService {
 
     var fileUrl = await uploadTask.ref.getDownloadURL();
     return fileUrl;
+  }
+
+  @override
+  Future<bool> deleteFile({required String filePath}) async {
+    try {
+      final ref = storageReference.child(filePath);
+      await ref.delete();
+
+      return true;
+    } catch (e) {
+      log("Error deleting file: $e");
+      return false;
+    }
   }
 }

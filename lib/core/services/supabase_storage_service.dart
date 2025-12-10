@@ -46,4 +46,27 @@ class SupabaseStorageService implements StorageService {
     log("File uploaded successfully: $publicUrl");
     return publicUrl;
   }
+
+  @override
+  Future<bool> deleteFile({required String filePath}) async {
+    try {
+      final fileName = my_path.basename(filePath);
+      // final fileExtension = my_path.extension(filePath);
+
+      final client = _supabase.client;
+
+      // filePath example: "fruits/apple.png" or "$path/$fileName"
+      var finalPath = "images/$fileName";
+      final result = await client.storage
+          .from(AppKeys.fruitsImagesBucketName)
+          .remove([finalPath]);
+      // remove takes a List<String>
+
+      log("File deleted successfully: $finalPath , result name : ${result.first.name}");
+      return true;
+    } catch (e) {
+      log("Failed to delete file: $e");
+      return false;
+    }
+  }
 }

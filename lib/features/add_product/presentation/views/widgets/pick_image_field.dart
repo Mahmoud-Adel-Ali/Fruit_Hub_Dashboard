@@ -23,7 +23,7 @@ class _PickImageFieldState extends State<PickImageField> {
         setState(() {});
         final ImagePicker picker = ImagePicker();
         image = await picker.pickImage(source: ImageSource.gallery);
-        widget.onFileChanged(File(image!.path));
+        widget.onFileChanged(image != null ? File(image!.path) : null);
         isLoading = false;
         setState(() {});
       },
