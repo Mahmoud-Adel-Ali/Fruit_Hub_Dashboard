@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dartz/dartz.dart';
 import 'package:fruit_hub_dashboard/core/services/storage_service.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 import '../../errors/failures.dart';
 import '../../utils/end_points.dart';
@@ -21,6 +22,18 @@ class ImagesRepoImpl implements ImagesRepo {
         path: EndPoints.images,
       );
       return Right(imageUrl);
+    } on StorageException catch (e) {
+      log("StorageException : $e");
+      if (e.error == "Duplicate") {
+        return Left(
+          ServerFailure(
+            "This image already exists. Please upload a different one.",
+          ),
+        );
+      }
+      return Left(
+        ServerFailure("${e.statusCode}. ${e.message}, ${e.error ?? ''}"),
+      );
     } catch (e) {
       log("Failed to upload image: $e");
       return Left(ServerFailure("Failed to upload image."));
@@ -36,6 +49,9 @@ class ImagesRepoImpl implements ImagesRepo {
       return result
           ? Right('Image removed successfully.')
           : Left(ServerFailure("Failed te remove file"));
+    } on StorageException catch (e) {
+      log("StorageException : $e");
+      return Left(ServerFailure("${e.message}, ${e.error ?? ''}"));
     } catch (e) {
       log("Failed to delete image: $e");
       return Left(ServerFailure("Failed to delete image."));

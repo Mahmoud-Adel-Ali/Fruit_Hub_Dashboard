@@ -51,6 +51,9 @@ class AddProductCubitBlocConsumer extends StatelessWidget {
         }
       },
       builder: (context, state) {
+        if (state is AddProductSuccess) {
+          return AddProductViewBody();
+        }
         return CustomProgressHub(
           isLoading: state is AddProductLoading,
           child: AddProductViewBody(),

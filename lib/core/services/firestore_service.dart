@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'database_service.dart';
@@ -11,8 +13,10 @@ class FirestoreService implements DatabaseService {
     required Map<String, dynamic> data,
     String? documentId,
   }) async {
+    log("Add Data ..............................................");
     if (documentId == null) {
-      await firestore.collection(path).add(data);
+      var result = await firestore.collection(path).add(data);
+      log("Add Data Result : ${result.toString()}");
     } else {
       var collection = firestore.collection(path).doc(documentId);
       await collection.set(data);
