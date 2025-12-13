@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dartz/dartz.dart';
 
 import '../../../features/add_product/data/models/product_model.dart';
@@ -17,9 +19,11 @@ class ProductRepoImpl implements ProductRepo {
     required ProductEntity addProductInputEntity,
   }) async {
     try {
+      var jsonData = ProductModel.fromEntity(addProductInputEntity).toJson();
+      log("Json Data is : $jsonData");
       await databaseService.addData(
         path: EndPoints.addProductsCollection,
-        data: ProductModel.fromEntity(addProductInputEntity).toJson(),
+        data: jsonData,
       );
       return Right(null);
     } catch (e) {

@@ -13,30 +13,27 @@ class AddProductCubit extends Cubit<AddProductState> {
   final ImagesRepo imagesRepo;
   final ProductRepo productRepo;
 
-  Future<void> addProduct({
-    required ProductEntity addProductInputEntity,
-  }) async {
+  Future<void> addProduct({required ProductEntity product}) async {
     emit(AddProductLoading());
     //* the var is used when failed to add product date [for delete the image]
-    String filePath = '';
+    String uploadedImgPath = '';
     final uploadImageResult = await imagesRepo.uploadImage(
-      image: addProductInputEntity.image,
+      image: product.image,
     );
     uploadImageResult.fold(
       (failure) => emit(AddProductFailure(message: failure.message)),
       (url) async {
-        filePath = url;
+        uploadedImgPath = url;
 
-        addProductInputEntity = addProductInputEntity.copyWith(imgUrl: url);
-        
+        product = product.copyWith(imgUrl: url);
+
         final result = await productRepo.addProduct(
-          addProductInputEntity: addProductInputEntity,
+          addProductInputEntity: product,
         );
 
         result.fold(
           (failure) {
-            
-            imagesRepo.deleteImage(filePath: filePath);
+            imagesRepo.deleteImage(filePath: uploadedImgPath);
             emit(AddProductFailure(message: failure.message));
           },
           (r) {

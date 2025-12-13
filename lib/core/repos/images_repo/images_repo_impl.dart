@@ -37,7 +37,7 @@ class ImagesRepoImpl implements ImagesRepo {
           ? Right('Image removed successfully.')
           : Left(ServerFailure("Failed te remove file"));
     } catch (e) {
-      log("Failed to upload image: $e");
+      log("Failed to delete image: $e");
       return Left(ServerFailure("Failed to delete image."));
     }
   }

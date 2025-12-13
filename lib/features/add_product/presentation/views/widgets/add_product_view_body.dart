@@ -60,8 +60,8 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               ),
               CustomTextFormField(
                 hintText: 'code',
-                keyboardType: TextInputType.number,
-                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                // keyboardType: TextInputType.number,
+                // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                 controller: code,
                 validator: simpleValidator,
               ),
@@ -131,9 +131,11 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
               CustomButton(
                 text: 'Add Product',
                 onPressed: () {
-                  if (formKey.currentState!.validate() && image != null) {
+                  if (image == null) {
+                    showErrorSnackBar(context, msg: 'Please select an image');
+                  } else if (formKey.currentState!.validate()) {
                     formKey.currentState!.save();
-                    ProductEntity item = ProductEntity(
+                    ProductEntity product = ProductEntity(
                       name: name.text,
                       price: double.parse(price.text),
                       code: code.text,
@@ -147,10 +149,8 @@ class _AddProductViewBodyState extends State<AddProductViewBody> {
                     );
 
                     context.read<AddProductCubit>().addProduct(
-                      addProductInputEntity: item,
+                      product: product,
                     );
-                  } else if (image == null) {
-                    showErrorSnackBar(context, msg: 'Please select an image');
                   } else {
                     autovalidateMode = AutovalidateMode.always;
                     setState(() {});
